@@ -53,7 +53,7 @@ VALUES
 - すべてのタスクを取得
 
 ```
-"SELECT * FROM tasks;"
+SELECT * FROM tasks;
 ```
 
 - ステータスが「未着手」のタスクのみ取得
