@@ -100,3 +100,17 @@ WHERE
 
 
 - 注文されていない商品を取得（LEFT JOINを使用）
+
+```
+SELECT
+    p.product_name AS 商品名 -- product_nameを商品名と表示
+FROM
+    products AS p  -- ordersテーブルをoとする
+LEFT JOIN
+    orders AS o ON o.product_id = p.product_id -- ordersテーブルとproductsテーブルのproduct_idのデータ結合（NULL値も結合）
+WHERE 
+    o.product_id IS NULL; -- ordersテーブルでproduct_idが一度も出現していない部分
+```
+
+(参考図)
+<img width="1212" height="1317" alt="Image" src="https://github.com/user-attachments/assets/c7428834-2601-43bb-a9e5-9f8c1d180d00" />
