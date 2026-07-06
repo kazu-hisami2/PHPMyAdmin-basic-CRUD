@@ -7,11 +7,70 @@
 
 ### テーブルの作成（customersテーブル、productsテーブル、ordersテーブル）
 
-- 
+- テーブル1: customers（顧客）
+```
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    phone VARCHAR(20)
+);
+```
 
-### テーブルのデータ挿入、主キーと外部キーのリレーションシップ
+- テーブル2: products（商品）
+```
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(200) NOT NULL,
+    price INT NOT NULL
+);
+```
+- テーブル3: orders（注文)
+```
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+```
 
-- 
+### サンプルデータの挿入
+
+- customers:
+```
+INSERT INTO customers (name, email, phone) VALUES
+('田中太郎', 'tanaka@example.com', '090-1234-5678'),
+('佐藤花子', 'sato@example.com', '080-2345-6789'),
+('鈴木一郎', 'suzuki@example.com', '070-3456-7890');
+```
+
+- products:
+```
+INSERT INTO products (product_name, price) VALUES
+('ノートPC', 120000),
+('マウス', 2000),
+('キーボード', 5000),
+('モニター', 30000),
+('ヘッドフォン', 8000);
+```
+
+- orders:
+```
+INSERT INTO orders (customer_id, product_id, quantity) VALUES
+(1, 1, 1),  -- 田中太郎がノートPCを1台
+(1, 2, 2),  -- 田中太郎がマウスを2個
+(2, 3, 1),  -- 佐藤花子がキーボードを1個
+(3, 1, 1),  -- 鈴木一郎がノートPCを1台
+(3, 4, 2);  -- 鈴木一郎がモニターを2台
+```
+
+(関係図)
+<img width="1526" height="1026" alt="Image" src="https://github.com/user-attachments/assets/00ce1f79-806b-4ef3-a796-c9c97e735234" />
+このように、customersテーブルとproductsテーブルはordersテーブルに1対多の関係となる
 
 ### リレーションシップを持つテーブルのデータ取得 
 
