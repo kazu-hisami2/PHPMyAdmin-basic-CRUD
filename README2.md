@@ -1,4 +1,4 @@
-# phpMyAdminの覚書2
+# phpMyAdminによるデータベース操作の覚書2
 
 ## 概要
 
