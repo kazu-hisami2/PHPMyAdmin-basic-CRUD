@@ -67,8 +67,36 @@ WHERE
 (参考図)
 <img width="1212" height="1380" alt="Image" src="https://github.com/user-attachments/assets/aaf61b6f-808e-4ff7-b338-ad2113a969de" />
 
-
-
 - ノートPCを購入した顧客の一覧を取得（カラムは顧客名で表示）
+
+・'ノートPC'名前からデータ取得する場合(ordersテーブルとproductsテーブルのデータ結合が必要)
+```
+SELECT   
+    c.name AS 顧客名 -- customersテーブルのnameカラムを顧客名と表示
+FROM
+    orders AS o -- ordersテーブルをoとする
+INNER JOIN
+    customers AS c ON o.customer_id = c.customer_id -- ordersテーブルとcustomersテーブルのcustomer_idのデータ結合
+INNER JOIN
+    products AS p ON o.product_id = p.product_id -- ordersテーブルとproductsテーブルのproduct_idのデータ結合
+WHERE
+    p.product_name = 'ノートPC'; -- customersテーブルに'田中太郎'を含む項目の部分
+```
+
+・'ノートPC'のprodict_id(=1)がわかっているときにデータ取得する場合(ordersテーブルとproductsテーブルのデータ結合は不要)
+```
+SELECT   
+    c.name AS 顧客名 -- customersテーブルのnameカラムを顧客名と表示
+FROM
+    orders AS o -- ordersテーブルをoとする
+INNER JOIN
+    customers AS c ON o.customer_id = c.customer_id -- ordersテーブルとcustomersテーブルのcustomer_idのデータ結合
+WHERE
+    o.product_id = 1; -- ordersテーブルのproduct_idが1の部分
+```
+
+(参考図)
+<img width="1212" height="1389" alt="Image" src="https://github.com/user-attachments/assets/7c846e44-64a7-4939-b710-0bdce985718f" />
+
 
 - 注文されていない商品を取得（LEFT JOINを使用）
