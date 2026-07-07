@@ -63,6 +63,36 @@ ORDER BY
 <img width="1212" height="1322" alt="Image" src="https://github.com/user-attachments/assets/8c2c2cd4-a81e-4027-bf03-b43f3d31a8cf" />
 
 - 最も売上が高い商品を取得（商品ごとの売上を集計）
+・売上が最高の商品の名前と売上を表示
+```
+SELECT
+	s.product_name AS 商品名,
+    SUM(s.price*s.quantity) AS 売上
+FROM
+	sales AS s
+GROUP BY
+	s.product_name; -- 商品ごとにグループ分け(SELECT前の処理)
+ORDER BY
+	売上 DESC LIMIT 1; -- 売上1位の商品のみ表示
+```
+(結果)
+<img width="1182" height="1122" alt="Image" src="https://github.com/user-attachments/assets/1c22e977-8183-45fa-b60d-f504f0ed2fb3" />
+
+・参考（商品ごとの売り上げランキング）
+```
+SELECT
+	s.product_name AS 商品名,
+    SUM(s.price*s.quantity) AS 売上
+FROM
+	sales AS s
+GROUP BY
+	s.product_name -- 商品ごとにグループ分け(SELECT前の処理)
+ORDER BY
+	売上 DESC; -- 商品別の売上が高い順に表示
+```
+(結果)
+<img width="1212" height="1488" alt="Image" src="https://github.com/user-attachments/assets/39ed94c1-3fc0-4371-82f4-ebf6076284a3" />
+
 - 売上が10万円以上の取引を取得
 - 12月3日以降の売上を日付順に取得
 - 平均以上の売上がある取引を取得（サブクエリを使用）
