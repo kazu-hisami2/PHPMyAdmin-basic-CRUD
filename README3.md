@@ -63,6 +63,7 @@ ORDER BY
 <img width="1212" height="1322" alt="Image" src="https://github.com/user-attachments/assets/8c2c2cd4-a81e-4027-bf03-b43f3d31a8cf" />
 
 - 最も売上が高い商品を取得（商品ごとの売上を集計）
+
 ・売上が最高の商品の名前と売上を表示
 ```
 SELECT
