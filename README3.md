@@ -180,3 +180,15 @@ WHERE
 <img width="1212" height="1340" alt="Image" src="https://github.com/user-attachments/assets/ae38673d-a9bf-41e8-a3d1-69c56d1891f0" />
 
 - 各カテゴリの商品数を集計（重複を除いた商品種類数と総数量）
+```
+SELECT
+	s.category AS カテゴリー,
+    COUNT(DISTINCT s.product_name) AS 商品種類数, -- 重複を除いた「商品の種類数」をカウント
+    SUM(s.quantity) AS 総数量 -- 売れた「総数量」を合計
+FROM
+	sales AS s
+GROUP BY
+	s.category
+```
+(結果)
+<img width="1212" height="1142" alt="Image" src="https://github.com/user-attachments/assets/b43a5ab4-2b08-4086-90f5-842c108d8c44" />
