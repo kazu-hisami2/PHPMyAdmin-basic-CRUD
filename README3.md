@@ -97,34 +97,15 @@ ORDER BY
 - 売上が10万円以上の取引を取得
 ```
 SELECT
-	s.sale_date AS 取引日,
-    SUM(s.price*s.quantity) AS 合計売上金額
-FROM
-	sales AS s
-GROUP BY
-	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
-HAVING
-	合計売上金額 >= 100000; -- 合計売上金額が100,000円以上のもののみ返す(GROUP BY後の処理)
+    s.product_name AS 商品名,
+    (s.price * s.quantity) AS 売上,
+    s.sale_date AS 取引日
+FROM sales AS s
+WHERE (s.price * s.quantity) >= 100000
+ORDER BY 売上 DESC;
 ```
 (結果)
-<img width="1212" height="1388" alt="Image" src="https://github.com/user-attachments/assets/0138b618-a323-4c98-bea0-c18f36ecf33c" />
-
-・参考(100,000円以上の取引を合計売上金額が高い順に表示)
-```
-SELECT
-	s.sale_date AS 取引日,
-    SUM(s.price*s.quantity) AS 合計売上金額
-FROM
-	sales AS s
-GROUP BY
-	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
-HAVING
-	合計売上金額 >= 100000 -- 合計売上金額が100,000円以上のもののみ返す(GROUP BY後の処理)
-ORDER BY
-	合計売上金額 DESC; -- 合計売上金額が大きなもの順にソート
-```
-(結果)
-<img width="1212" height="1418" alt="Image" src="https://github.com/user-attachments/assets/e4285a5e-0885-4a10-a278-d53ab8a7dbf6" />
+<img width="1581" height="1142" alt="Image" src="https://github.com/user-attachments/assets/95698b97-c312-4188-8a0b-e131ae5ab8ef" />
 
 - 12月3日以降の売上を日付順に取得
 ```
