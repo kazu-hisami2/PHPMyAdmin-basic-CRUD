@@ -172,7 +172,7 @@ SELECT
 FROM
 	sales AS s
 GROUP BY
-	s.category
+	s.category;
 ```
 (結果)
 <img width="1212" height="1142" alt="Image" src="https://github.com/user-attachments/assets/b43a5ab4-2b08-4086-90f5-842c108d8c44" />
