@@ -45,7 +45,7 @@ INSERT INTO sales (product_name, category, price, quantity, sale_date) VALUES
 SELECT SUM(price) AS 売上合計金額 FROM sales;
 ```
 (結果)
-<img width="1581" height="1373" alt="Image" src="https://github.com/user-attachments/assets/8c55c501-49e9-4872-9050-bcd72447c877" />
+<img width="1212" height="1050" alt="Image" src="https://github.com/user-attachments/assets/a4175bb2-9928-4d0c-b55e-ce119b8890a4" />
 
 - カテゴリ別の売上合計を計算（売上が高い順に表示）
 - 最も売上が高い商品を取得（商品ごとの売上を集計）
