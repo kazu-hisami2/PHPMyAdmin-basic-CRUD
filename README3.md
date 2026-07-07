@@ -137,7 +137,7 @@ FROM sales AS s
 WHERE (s.price * s.quantity) > (
     SELECT AVG(sales.price * sales.quantity)
     FROM sales
-)
+)-- サブクエリ内ではメインクエリのエイリアスが使えないことに注意！！
 ORDER BY 売上 DESC;
 ```
 (結果)
