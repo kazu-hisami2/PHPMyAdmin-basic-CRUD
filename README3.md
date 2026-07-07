@@ -94,6 +94,37 @@ ORDER BY
 <img width="1212" height="1488" alt="Image" src="https://github.com/user-attachments/assets/39ed94c1-3fc0-4371-82f4-ebf6076284a3" />
 
 - 売上が10万円以上の取引を取得
+```
+SELECT
+	s.sale_date AS 取引日,
+    SUM(s.price*s.quantity) AS 合計売上金額
+FROM
+	sales AS s
+GROUP BY
+	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
+HAVING
+	合計売上金額 >= 100000; -- 合計売上金額が100,000円以上のものを表示(GROUP BY後の処理)
+```
+(結果)
+<img width="1212" height="1388" alt="Image" src="https://github.com/user-attachments/assets/0138b618-a323-4c98-bea0-c18f36ecf33c" />
+
+・参考(100,000円以上の取引を合計売上金額が高い順に表示)
+```
+SELECT
+	s.sale_date AS 取引日,
+    SUM(s.price*s.quantity) AS 合計売上金額
+FROM
+	sales AS s
+GROUP BY
+	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
+HAVING
+	合計売上金額 >= 100000 -- 合計売上金額が100,000円以上のものを表示(GROUP BY後の処理)
+ORDER BY
+	合計売上金額 DESC; -- 合計売上金額が大きなもの順にソート
+```
+(結果)
+<img width="1212" height="1418" alt="Image" src="https://github.com/user-attachments/assets/e4285a5e-0885-4a10-a278-d53ab8a7dbf6" />
+
 - 12月3日以降の売上を日付順に取得
 - 平均以上の売上がある取引を取得（サブクエリを使用）
 - 各カテゴリの商品数を集計（重複を除いた商品種類数と総数量）
