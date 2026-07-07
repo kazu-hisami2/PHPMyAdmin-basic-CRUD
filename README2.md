@@ -164,11 +164,11 @@ WHERE
 SELECT
     p.product_name AS 商品名 -- product_nameを商品名と表示
 FROM
-    products AS p  -- ordersテーブルをoとする
+    products AS p  -- productsテーブルをpとする
 LEFT JOIN
-    orders AS o ON o.product_id = p.product_id -- ordersテーブルとproductsテーブルのproduct_idのデータ結合（NULL値も結合）
+    orders AS o ON o.product_id = p.product_id -- ordersテーブルとproductsテーブルのproduct_idのデータ結合（積集合でない部分はNULL値が入る）
 WHERE 
-    o.product_id IS NULL; -- ordersテーブルでproduct_idが一度も出現していない部分
+    o.product_id IS NULL; -- LEFTJOINした集合の要素の内、NULL値の部分
 ```
 
 (参考図)
