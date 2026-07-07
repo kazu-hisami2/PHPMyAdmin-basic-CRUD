@@ -126,5 +126,57 @@ ORDER BY
 <img width="1212" height="1418" alt="Image" src="https://github.com/user-attachments/assets/e4285a5e-0885-4a10-a278-d53ab8a7dbf6" />
 
 - 12月3日以降の売上を日付順に取得
+```
+SELECT
+	s.sale_date AS 取引日,
+    SUM(s.price*s.quantity) AS 合計売上金額
+FROM
+	sales AS s
+WHERE
+	s.sale_date >= '2024-12-03' -- 日にちが2024-12-03以降のものを判定(GROUP BYより前の処理)
+GROUP BY
+	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
+ORDER BY
+	取引日 ASC; -- 取引日が古いもの順にソート
+```
+(結果)
+<img width="1212" height="1419" alt="Image" src="https://github.com/user-attachments/assets/67f4674a-fc35-46b4-84a4-200a49189c4d" />
+
+・参考(12月2日から12月5日までの売上を日付順に取得)
+```
+SELECT
+	s.sale_date AS 取引日,
+    SUM(s.price*s.quantity) AS 合計売上金額
+FROM
+	sales AS s
+WHERE
+	s.sale_date BETWEEN '2024-12-02' AND '2024-12-05' -- 日にちが2024-12-02から2024-12-05のものを判定(GROUP BYより前の処理)
+GROUP BY
+	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
+ORDER BY
+	取引日 ASC; -- 取引日が古いもの順にソート
+```
+(結果)
+<img width="1212" height="1419" alt="Image" src="https://github.com/user-attachments/assets/7288e9ed-8586-4961-ab52-34655beec308" />
+
 - 平均以上の売上がある取引を取得（サブクエリを使用）
+```
+WITH daily_sales AS (
+    SELECT sale_date, SUM(price * quantity) AS total_sales
+    FROM sales
+    GROUP BY sale_date
+)
+-- 「日ごとの売上表」を1回だけ定義して「daily_sales」と命名(WITHを用いることでクエリ内でサブクエリのdaily_salesテーブルを使用可能)
+
+SELECT
+	d.sale_date AS 取引日,
+    d.total_sales AS 合計売上金額
+FROM
+	daily_sales AS d
+WHERE
+	d.total_sales >= (SELECT AVG(daily_sales.total_sales) FROM daily_sales); -- サブクエリ内なので"d"のエイリアスは使えないことに注意！
+```
+(結果)
+<img width="1212" height="1340" alt="Image" src="https://github.com/user-attachments/assets/ae38673d-a9bf-41e8-a3d1-69c56d1891f0" />
+
 - 各カテゴリの商品数を集計（重複を除いた商品種類数と総数量）
