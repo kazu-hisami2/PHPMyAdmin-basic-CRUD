@@ -103,7 +103,7 @@ FROM
 GROUP BY
 	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
 HAVING
-	合計売上金額 >= 100000; -- 合計売上金額が100,000円以上のものを表示(GROUP BY後の処理)
+	合計売上金額 >= 100000; -- 合計売上金額が100,000円以上のもののみ返す(GROUP BY後の処理)
 ```
 (結果)
 <img width="1212" height="1388" alt="Image" src="https://github.com/user-attachments/assets/0138b618-a323-4c98-bea0-c18f36ecf33c" />
@@ -118,7 +118,7 @@ FROM
 GROUP BY
 	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
 HAVING
-	合計売上金額 >= 100000 -- 合計売上金額が100,000円以上のものを表示(GROUP BY後の処理)
+	合計売上金額 >= 100000 -- 合計売上金額が100,000円以上のもののみ返す(GROUP BY後の処理)
 ORDER BY
 	合計売上金額 DESC; -- 合計売上金額が大きなもの順にソート
 ```
@@ -133,7 +133,7 @@ SELECT
 FROM
 	sales AS s
 WHERE
-	s.sale_date >= '2024-12-03' -- 日にちが2024-12-03以降のものを判定(GROUP BYより前の処理)
+	s.sale_date >= '2024-12-03' -- 日にちが2024-12-03以降のものを返す(GROUP BYより前の処理)
 GROUP BY
 	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
 ORDER BY
@@ -150,7 +150,7 @@ SELECT
 FROM
 	sales AS s
 WHERE
-	s.sale_date BETWEEN '2024-12-02' AND '2024-12-05' -- 日にちが2024-12-02から2024-12-05のものを判定(GROUP BYより前の処理)
+	s.sale_date BETWEEN '2024-12-02' AND '2024-12-05' -- 日にちが2024-12-02から2024-12-05のものを返す(GROUP BYより前の処理)
 GROUP BY
 	s.sale_date -- 取引日ごとにグループ分け(SELECT前の処理)
 ORDER BY
