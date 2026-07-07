@@ -41,6 +41,12 @@ INSERT INTO sales (product_name, category, price, quantity, sale_date) VALUES
 
 ### 作成するクエリについて 
 - 売上合計金額を計算（price × quantity の合計）
+```
+SELECT SUM(price) AS 売上合計金額 FROM sales;
+```
+(結果)
+<img width="1581" height="1373" alt="Image" src="https://github.com/user-attachments/assets/8c55c501-49e9-4872-9050-bcd72447c877" />
+
 - カテゴリ別の売上合計を計算（売上が高い順に表示）
 - 最も売上が高い商品を取得（商品ごとの売上を集計）
 - 売上が10万円以上の取引を取得
