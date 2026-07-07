@@ -129,6 +129,22 @@ ORDER BY
 
 - 平均以上の売上がある取引を取得（サブクエリを使用）
 ```
+SELECT
+    s.product_name AS 商品名,
+    (s.price * s.quantity) AS 売上,
+    s.sale_date AS 取引日
+FROM sales AS s
+WHERE (s.price * s.quantity) > (
+    SELECT AVG(sales.price * sales.quantity)
+    FROM sales
+)
+ORDER BY 売上 DESC;
+```
+(結果)
+<img width="1581" height="1175" alt="Image" src="https://github.com/user-attachments/assets/1b6c234a-83ab-497a-aa68-2fb47d7d71d6" />
+
+・参考（日にちの売上平均以上の日と合計売上を表示）
+```
 WITH daily_sales AS (
     SELECT sale_date, SUM(price * quantity) AS total_sales
     FROM sales
@@ -138,7 +154,7 @@ WITH daily_sales AS (
 
 SELECT
 	d.sale_date AS 取引日,
-    d.total_sales AS 合計売上金額
+	d.total_sales AS 合計売上金額
 FROM
 	daily_sales AS d
 WHERE
