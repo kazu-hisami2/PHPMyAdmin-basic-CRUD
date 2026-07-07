@@ -49,9 +49,18 @@ SELECT SUM(s.price*s.quantity) AS 売上合計金額 FROM sales AS s;
 
 - カテゴリ別の売上合計を計算（売上が高い順に表示）
 ```
-
+SELECT
+	s.category AS カテゴリー,
+    SUM(s.price*s.quantity) AS 売上
+FROM
+	sales AS s
+GROUP BY
+	s.category -- カテゴリーごとにグループ分け(SELECT前の処理)
+ORDER BY
+	売上 DESC; -- カテゴリ別の売上が高い順に表示
 ```
 (結果)
+<img width="1212" height="1322" alt="Image" src="https://github.com/user-attachments/assets/8c2c2cd4-a81e-4027-bf03-b43f3d31a8cf" />
 
 - 最も売上が高い商品を取得（商品ごとの売上を集計）
 - 売上が10万円以上の取引を取得
