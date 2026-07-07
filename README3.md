@@ -100,9 +100,12 @@ SELECT
     s.product_name AS 商品名,
     (s.price * s.quantity) AS 売上,
     s.sale_date AS 取引日
-FROM sales AS s
-WHERE (s.price * s.quantity) >= 100000
-ORDER BY 売上 DESC;
+FROM
+	sales AS s
+WHERE
+	(s.price * s.quantity) >= 100000
+ORDER BY
+	売上 DESC;
 ```
 (結果)
 <img width="1581" height="1142" alt="Image" src="https://github.com/user-attachments/assets/95698b97-c312-4188-8a0b-e131ae5ab8ef" />
